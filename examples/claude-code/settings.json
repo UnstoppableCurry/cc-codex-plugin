@@ -1,0 +1,7 @@
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "YOUR_GATEWAY_KEY",
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:8000/anthropic",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6"
+  }
+}
