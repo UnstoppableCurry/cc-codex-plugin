@@ -1,0 +1,9 @@
+[model_providers.bridge]
+name = "Local Bridge"
+base_url = "http://127.0.0.1:8000/openai"
+env_key = "OPENAI_API_KEY"
+
+[profiles.default]
+model = "gpt-5.1-codex"
+model_provider = "bridge"
+reasoning_effort = "medium"

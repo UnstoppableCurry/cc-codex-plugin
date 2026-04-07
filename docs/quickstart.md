@@ -16,7 +16,7 @@ Use the example at `examples/claude-code/settings.json` and set:
 
 ## 3. Connect Codex
 
-Use the example at `examples/codex/config.toml` and point Codex to the local bridge provider.
+Use the example at `examples/codex/config.example.toml` and point Codex to the local bridge provider.
 
 ## 4. Validate
 
