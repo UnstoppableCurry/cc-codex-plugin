@@ -2,6 +2,8 @@
 
 Use Claude Code with a Codex-backed gateway, without manually editing config files.
 
+[简体中文说明](./README.zh-CN.md)
+
 This project is optimized for the actual Claude Code user path:
 
 - first: one-command Claude Code install
@@ -93,3 +95,4 @@ See:
 - `docs/quickstart.md`
 - `docs/model-mapping.md`
 - `docs/limitations.md`
+- `docs/zh-CN/quickstart.md`
