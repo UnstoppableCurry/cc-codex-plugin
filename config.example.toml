@@ -1,0 +1,34 @@
+[server]
+host = "0.0.0.0"
+port = 8000
+log_level = "INFO"
+
+[security]
+enable_auth = true
+auth_token = "__CCPROXY_AUTH_TOKEN__"
+
+[logging]
+level = "INFO"
+format = "json"
+plugin_log_base_dir = "/data/logs"
+
+[plugins.access_log]
+enabled = true
+client_enabled = true
+client_format = "structured"
+client_log_file = "/data/logs/access.log"
+provider_enabled = false
+
+[plugins.codex]
+enabled = true
+base_url = "https://chatgpt.com/backend-api/codex"
+supports_streaming = true
+preferred_upstream_mode = "streaming"
+supported_input_formats = ["openai.responses", "openai.chat_completions", "anthropic.messages"]
+verbose_logging = false
+inject_detection_payload = true
+
+[plugins.codex.oauth]
+base_url = "https://auth.openai.com"
+client_id = "app_EMoamEEZ73f0CkXaXp7hrann"
+callback_port = 1455
