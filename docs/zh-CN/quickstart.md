@@ -1,5 +1,11 @@
 # 中文快速开始
 
+## 最简单理解
+
+目标只有一句话：
+
+**让 Claude Code 用上你的 Codex 订阅。**
+
 ## 推荐路径：先装 Claude Code 配置
 
 执行：
@@ -34,7 +40,7 @@ curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/ma
 
 - `examples/codex/config.example.toml`
 
-## 第四步：验证
+## 第四步：验证结果
 
 先做最小验证：
 
@@ -43,3 +49,16 @@ curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/ma
 - 确认请求已经命中你的 bridge 日志
 
 不要一上来就测多 agent 或长链路任务。
+
+## 最终效果
+
+如果配置成功，你看到的使用方式不会变：
+
+- 还是打开 Claude Code
+- 还是正常对话
+- 还是正常写代码
+
+变化只在底层：
+
+- Claude Code 的请求被转到你的 bridge
+- bridge 再去使用 Codex 侧能力或订阅
