@@ -2,6 +2,8 @@
 
 把 **Codex 订阅** 转成 **Claude Code 可直接使用** 的入口。
 
+![Claude Code 配置截图](./assets/screenshot-claude-code.png)
+
 你可以把它理解成：
 
 - 你有 Codex 侧的能力或订阅
@@ -21,6 +23,12 @@
 - 提供一个 bridge / 兼容层
 - 提供一键安装脚本
 - 自动把 Claude Code 指到这个 bridge
+
+## 为什么要做这个
+
+- 你想继续用 Claude Code
+- 你想把底层接到 Codex 订阅
+- 你不想每次都自己改配置文件
 
 ## 适合谁
 
@@ -56,6 +64,28 @@ curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/ma
 ### 3. 重启 Claude Code
 
 重启之后，Claude Code 就会走你填写的 bridge。
+
+## 用户最容易问的两个问题
+
+### 1. 这能不能顺便解决多 agent / swarm？
+
+不能完全解决。
+
+它能解决的是：
+
+- 请求兼容
+- 配置接入
+- 使用体验
+
+但如果 Claude Code 本地真的要起多 agent，还是取决于你本机的 Git/worktree 环境。
+
+![Agents / worktree 截图](./assets/screenshot-agents.png)
+
+### 2. Claude Code 和 Codex 到底差在哪？
+
+它们都能做多步编码，但本地执行模型、术语和并行方式不是完全一样。
+
+![Claude Code vs Codex 截图](./assets/screenshot-claude-vs-codex.png)
 
 ## 如果你不想跑脚本
 

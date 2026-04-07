@@ -1,15 +1,21 @@
 # cc-codex-plugin
 
-Use Claude Code with a Codex-backed gateway, without manually editing config files.
+Use your Codex subscription from Claude Code.
 
 [简体中文说明](./README.zh-CN.md)
 
-This project is optimized for the actual Claude Code user path:
+This repository is built for the real end-user path:
 
 - first: one-command Claude Code install
-- second: example configuration
-- third: self-hosted bridge deployment
-- always: explicit limitations around agents, worktrees, and local environment requirements
+- second: clear examples
+- third: optional self-hosted bridge deployment
+
+![Claude Code setup screenshot](./assets/screenshot-claude-code.png)
+
+## In one sentence
+
+You keep using Claude Code as usual.  
+This project makes those requests go through a Codex-backed bridge.
 
 ## What This Repository Really Is
 
@@ -22,6 +28,12 @@ So this repository ships the next best thing:
 - ready-to-copy config examples
 
 The goal is plugin-like user experience, even though the underlying integration point is Claude Code configuration, not a public plugin marketplace.
+
+## Why this repository exists
+
+- you want Claude Code
+- you want to pay through a Codex-side subscription or runtime path
+- you do not want to hand-edit config every time
 
 It is designed for:
 
@@ -50,6 +62,22 @@ The installer will:
 - keep your existing Claude Code settings and only merge the required env keys
 
 After that, restart Claude Code and start using it normally.
+
+## What users usually ask next
+
+### Does this also fix multi-agent / swarm?
+
+No. It helps with request compatibility and setup experience.
+
+If Claude Code wants true local subagents, the local machine still needs a valid Git/worktree environment.
+
+![Agents and worktrees screenshot](./assets/screenshot-agents.png)
+
+### What is different between Claude Code and Codex?
+
+They can both do multi-step coding, but they do not use exactly the same terminology or local execution model.
+
+![Claude Code vs Codex screenshot](./assets/screenshot-claude-vs-codex.png)
 
 ## Manual Install
 
