@@ -1,5 +1,15 @@
 # Quickstart
 
+## Recommended path for Claude Code users
+
+Run:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/main/scripts/install-claude-code.sh | bash
+```
+
+This is the intended main path for end users. You do not need to manually edit `~/.claude/settings.json` unless you want full control.
+
 ## 1. Start the bridge
 
 1. Copy `config.example.toml` to `config.toml`
@@ -13,6 +23,8 @@ Use the example at `examples/claude-code/settings.json` and set:
 - `ANTHROPIC_AUTH_TOKEN`
 - `ANTHROPIC_BASE_URL`
 - `ANTHROPIC_MODEL`
+
+The installer script writes exactly these values for you.
 
 ## 3. Connect Codex
 

@@ -1,21 +1,29 @@
 # cc-codex-plugin
 
-An open-source bridge project for users who want a Claude Code style workflow on top of a Codex-compatible runtime path.
+Use Claude Code with a Codex-backed gateway, without manually editing config files.
 
-This repository is intentionally C-end friendly:
+This project is optimized for the actual Claude Code user path:
 
-- clear Docker entrypoint
-- example client configuration
-- explicit model mapping
-- explicit limitations around agents, worktrees, and local environment requirements
+- first: one-command Claude Code install
+- second: example configuration
+- third: self-hosted bridge deployment
+- always: explicit limitations around agents, worktrees, and local environment requirements
 
-## What It Is
+## What This Repository Really Is
 
-`cc-codex-plugin` packages a Codex-oriented proxy/plugin entrypoint and documents how to connect clients such as Claude Code and Codex CLI to a unified gateway.
+Claude Code does not currently expose a public “install third-party plugin from repo” flow like an app store.
+
+So this repository ships the next best thing:
+
+- a bridge runtime for Codex-compatible backends
+- a one-command Claude Code installer
+- ready-to-copy config examples
+
+The goal is plugin-like user experience, even though the underlying integration point is Claude Code configuration, not a public plugin marketplace.
 
 It is designed for:
 
-- users who want one stable bridge layer
+- Claude Code users who want to route through a Codex-backed subscription
 - operators who want a documented compatibility surface
 - developers who want an inspectable starting point instead of a closed relay box
 
@@ -25,15 +33,45 @@ It is designed for:
 - not a secret production config dump
 - not a guarantee that Claude Code local subagents will work without local Git/worktree support
 
+## Fastest Path: Install Into Claude Code
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/main/scripts/install-claude-code.sh | bash
+```
+
+The installer will:
+
+- ask for your bridge base URL
+- ask for your gateway key
+- optionally set a default model
+- update `~/.claude/settings.json`
+- keep your existing Claude Code settings and only merge the required env keys
+
+After that, restart Claude Code and start using it normally.
+
+## Manual Install
+
+If you do not want the installer, copy the example from:
+
+- `examples/claude-code/settings.json`
+
+and merge it into:
+
+- `~/.claude/settings.json`
+
 ## Repository Layout
 
-- `Dockerfile` runnable image for the plugin bridge
+- `scripts/install-claude-code.sh` one-command Claude Code installer
+- `scripts/uninstall-claude-code.sh` removes the injected Claude Code env keys
+- `Dockerfile` runnable image for the bridge
 - `config.example.toml` example server/plugin config
 - `examples/claude-code/` client-side Claude Code example
 - `examples/codex/` client-side Codex example
 - `docs/` human-readable setup, model mapping, and limitations
 
-## Quick Start
+## Self-Hosted Bridge
+
+If you want to run the bridge yourself:
 
 ```bash
 cp config.example.toml config.toml
@@ -44,7 +82,7 @@ docker run --rm -p 8000:8000 \
   ccproxy serve --config /app/config.toml --host 0.0.0.0 --port 8000
 ```
 
-Then point your client to the bridge and use one of the example configs in `examples/`.
+Then point Claude Code to that bridge with the installer or the manual settings example.
 
 ## Key Limitation
 
