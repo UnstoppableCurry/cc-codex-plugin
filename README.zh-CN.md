@@ -65,28 +65,6 @@ curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/ma
 
 重启之后，Claude Code 就会走你填写的 bridge。
 
-## 用户最容易问的两个问题
-
-### 1. 这能不能顺便解决多 agent / swarm？
-
-不能完全解决。
-
-它能解决的是：
-
-- 请求兼容
-- 配置接入
-- 使用体验
-
-但如果 Claude Code 本地真的要起多 agent，还是取决于你本机的 Git/worktree 环境。
-
-![Agents / worktree 截图](./assets/screenshot-agents.png)
-
-### 2. Claude Code 和 Codex 到底差在哪？
-
-它们都能做多步编码，但本地执行模型、术语和并行方式不是完全一样。
-
-![Claude Code vs Codex 截图](./assets/screenshot-claude-vs-codex.png)
-
 ## 如果你不想跑脚本
 
 手动参考：
@@ -131,23 +109,6 @@ docker run --rm -p 8000:8000 \
 - 正常写代码
 
 只是底层计费和能力入口，不再直接走原生 Claude 订阅，而是走你配置好的 Codex 侧 bridge。
-
-## 重要限制
-
-这个项目能解决的是：
-
-- 请求格式兼容
-- 接入体验
-- 配置简化
-
-它不能替代的是：
-
-- Claude Code 本地的 `git worktree`
-- 本地 subagent / swarm 所需的工作区隔离条件
-
-也就是说：
-
-普通请求链路可以通过 bridge 做兼容，但如果 Claude Code 本地要起多 agent，最终还是要满足本机环境要求。
 
 ## 中文文档
 

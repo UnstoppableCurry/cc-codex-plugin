@@ -45,7 +45,6 @@ It is designed for:
 
 - not a full hosted service
 - not a secret production config dump
-- not a guarantee that Claude Code local subagents will work without local Git/worktree support
 
 ## Fastest Path: Install Into Claude Code
 
@@ -62,22 +61,6 @@ The installer will:
 - keep your existing Claude Code settings and only merge the required env keys
 
 After that, restart Claude Code and start using it normally.
-
-## What users usually ask next
-
-### Does this also fix multi-agent / swarm?
-
-No. It helps with request compatibility and setup experience.
-
-If Claude Code wants true local subagents, the local machine still needs a valid Git/worktree environment.
-
-![Agents and worktrees screenshot](./assets/screenshot-agents.png)
-
-### What is different between Claude Code and Codex?
-
-They can both do multi-step coding, but they do not use exactly the same terminology or local execution model.
-
-![Claude Code vs Codex screenshot](./assets/screenshot-claude-vs-codex.png)
 
 ## Manual Install
 
@@ -113,10 +96,6 @@ docker run --rm -p 8000:8000 \
 ```
 
 Then point Claude Code to that bridge with the installer or the manual settings example.
-
-## Key Limitation
-
-This project can make request/response compatibility smoother. It cannot replace Claude Code's local `git worktree` requirement for true multi-agent isolation. If a client wants subagents or swarm-style parallelism, the local machine still needs a valid Git/worktree environment.
 
 See:
 
