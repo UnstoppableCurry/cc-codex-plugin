@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cc-codex-plugin — 让 Claude Code 走 Codex 订阅</title>
+  <meta name="description" content="cc-codex-plugin：一键安装脚本与 bridge 配置，让 Claude Code 继续像平时一样使用，底层走你配置的 Codex 侧 bridge。">
+  <meta name="keywords" content="Claude Code,Codex,bridge,安装脚本,cc-codex-plugin">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/cc-codex-plugin/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="cc-codex-plugin — 让 Claude Code 走 Codex 订阅">
+  <meta property="og:description" content="一键安装 Claude Code 配置，接入 Codex 侧 bridge。开源、可自托管、文档完整。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/cc-codex-plugin/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="zh-CN" href="https://unstoppablecurry.github.io/cc-codex-plugin/">
+  <link rel="alternate" hreflang="en" href="https://unstoppablecurry.github.io/cc-codex-plugin/en/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="cc-codex-plugin 首页">
+        <span class="brand-name">cc-codex-plugin</span>
+        <span class="brand-tag">Claude Code × Codex bridge</span>
+      </a>
+      <nav class="site-nav" aria-label="页面导航">
+        <ul>
+          <li><a href="#overview" aria-current="page">概览</a></li>
+          <li><a href="#install">安装</a></li>
+          <li><a href="#workflow">工作流</a></li>
+          <li><a href="#screenshots">截图</a></li>
+          <li><a href="#limitations">限制</a></li>
+          <li><a href="#self-host">自托管</a></li>
+          <li><a href="#docs">文档</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch" role="navigation" aria-label="语言切换">
+        <a href="./" aria-current="true" lang="zh-CN">中文</a>
+        <a href="en/" lang="en">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <span class="badge">开源 · 可自托管</span>
+        <h1>让 Claude Code 像平时一样用，底层走 Codex 订阅</h1>
+        <p class="hero-lead">
+          把 Codex 侧能力或订阅接到 Claude Code。提供一键安装脚本、bridge 运行配置与可检查的示例——不是官方插件市场插件，而是基于 Claude Code 配置的接入方式。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#install">一键安装</a>
+          <a class="btn btn-secondary" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/README.zh-CN.md">查看 README</a>
+          <a class="btn btn-secondary" href="https://github.com/UnstoppableCurry/cc-codex-plugin">GitHub 仓库</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="container">
+        <p class="section-label">概览</p>
+        <h2>这个项目是什么</h2>
+        <p class="section-intro">
+          Claude Code 目前没有类似应用商店的公开「从仓库安装第三方插件」流程。本仓库提供 bridge 运行时、Claude Code 一键安装脚本，以及可直接复制的配置示例——目标是插件式用户体验，底层接入点是 Claude Code 配置。
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>适合谁</h3>
+            <ul>
+              <li>想继续用 Claude Code，但订阅或上游走 Codex 风格能力</li>
+              <li>想统一客户端接入方式</li>
+              <li>想要可检查的开源 bridge 起点，而非封闭 relay</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>不是什么</h3>
+            <ul>
+              <li>不是完整托管服务</li>
+              <li>不是生产环境密钥 dump</li>
+              <li>不是官方 Claude Code 插件市场条目</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout" role="note">
+          <p><strong>一句话：</strong>让 Claude Code 像平时一样用，但底层计费和能力入口走你配置好的 Codex 侧 bridge。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="container">
+        <p class="section-label">安装</p>
+        <h2>最快路径：三步接入 Claude Code</h2>
+        <ol class="steps">
+          <li>
+            <h3>准备 bridge 地址和 key</h3>
+            <p class="card-muted">你需要知道 bridge 地址，以及访问该 bridge 的 gateway key。</p>
+          </li>
+          <li>
+            <h3>执行安装脚本</h3>
+            <span class="code-label">终端命令</span>
+            <div class="code-block" role="region" aria-label="安装命令">
+              <code>curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/main/scripts/install-claude-code.sh | bash</code>
+            </div>
+            <p class="card-muted">脚本会询问 bridge base URL、gateway key，可选默认模型；自动更新 <code>~/.claude/settings.json</code>，并尽量保留已有配置，只合并所需环境变量：</p>
+            <ul>
+              <li><code>ANTHROPIC_AUTH_TOKEN</code></li>
+              <li><code>ANTHROPIC_BASE_URL</code></li>
+              <li><code>ANTHROPIC_MODEL</code>（默认 <code>claude-sonnet-4-6</code>）</li>
+            </ul>
+          </li>
+          <li>
+            <h3>重启 Claude Code</h3>
+            <p class="card-muted">重启后，Claude Code 会走你填写的 bridge。使用方式不变：打开 Claude Code、正常对话、正常写代码。</p>
+          </li>
+        </ol>
+        <h3>手动安装</h3>
+        <p class="section-intro">若不想跑脚本，参考 <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/examples/claude-code/settings.json"><code>examples/claude-code/settings.json</code></a>，合并进 <code>~/.claude/settings.json</code>。卸载可用 <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/scripts/uninstall-claude-code.sh"><code>scripts/uninstall-claude-code.sh</code></a> 移除注入的环境变量键。</p>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="container">
+        <p class="section-label">工作流</p>
+        <h2>推荐验证流程</h2>
+        <p class="section-intro">面向终端用户的主路径是先装 Claude Code 配置；完整 bridge 部署见下方自托管章节与仓库文档。</p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>1. 启动 bridge</h3>
+            <ol>
+              <li>复制 <code>config.example.toml</code> 为 <code>config.toml</code></li>
+              <li>填入你实际控制的认证 token 与上游配置</li>
+              <li>构建并运行 Docker 镜像</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>2. 连接 Claude Code</h3>
+            <p>安装脚本或手动示例写入 <code>ANTHROPIC_AUTH_TOKEN</code>、<code>ANTHROPIC_BASE_URL</code>、<code>ANTHROPIC_MODEL</code>。</p>
+          </article>
+          <article class="card">
+            <h3>3. 连接 Codex（可选）</h3>
+            <p>参考 <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/examples/codex/config.example.toml"><code>examples/codex/config.example.toml</code></a>，将 Codex 指向本地 bridge provider。</p>
+          </article>
+          <article class="card">
+            <h3>4. 验证</h3>
+            <p>先用单 agent 简单 prompt 验证：</p>
+            <ul>
+              <li>问一个简单问题</li>
+              <li>请求解释一小段代码</li>
+              <li>确认请求日志命中 bridge</li>
+            </ul>
+            <p class="card-muted">通过后再测试工具或多步工作流。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="container">
+        <p class="section-label">截图</p>
+        <h2>配置与工作流参考</h2>
+        <p class="section-intro">以下截图为仓库 <code>assets/</code> 中的文档参考图，说明 Claude Code 配置、Agents/worktree 概念，以及 Claude Code 与 Codex 的差异——与 <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/limitations.md">限制说明</a> 中的要点一致。</p>
+        <div class="gallery">
+          <figure class="figure-card">
+            <img src="assets/screenshot-claude-code.png" width="1200" height="675" alt="Claude Code 直连路径文档截图：展示 Node.js 安装、npm 全局安装 claude-code，以及 settings.json 中 ANTHROPIC_AUTH_TOKEN、ANTHROPIC_BASE_URL、ANTHROPIC_MODEL 环境变量最小配置示例" loading="lazy" decoding="async">
+            <figcaption>Claude Code 配置路径：最小 <code>settings.json</code> 环境变量示例（与安装脚本写入的键一致）。</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <img src="assets/screenshot-agents.png" width="1200" height="675" alt="Agents 与工作流文档截图：说明单线程任务、任务并行、多 agent 并行与 Git worktree 隔离，以及本地 worktree 前置条件" loading="lazy" decoding="async">
+            <figcaption>Agents 与 worktree：请求兼容不等于多 agent 并行；隔离依赖客户端本地 Git/worktree 环境。</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <img src="assets/screenshot-claude-vs-codex.png" width="1200" height="675" alt="Claude Code 与 Codex 对比文档截图：对比 subagents、worktrees 与 profiles、provider 等术语差异，强调协议兼容与本地环境兼容不是一回事" loading="lazy" decoding="async">
+            <figcaption>Claude Code vs Codex：术语与产品边界不同；bridge 可统一网关，但不能单独复制 Claude Code 本地 agent 环境。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="limitations">
+      <div class="container">
+        <p class="section-label">限制</p>
+        <h2>请求兼容 ≠ 环境兼容</h2>
+        <p class="section-intro">bridge 可以规范化请求与响应格式，但无法替你准备 Claude Code 在本地期望的 IDE/CLI 能力。</p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Claude Code 子 agent 依赖本地机器</h3>
+            <p>若 Claude Code 尝试创建隔离 subagent，客户端可能需要：</p>
+            <ul>
+              <li>有效的 Git 仓库</li>
+              <li>至少一次 commit</li>
+              <li>可用的 <code>git worktree</code> 支持</li>
+              <li>或已配置的 <code>WorktreeCreate</code> / <code>WorktreeRemove</code> hooks</li>
+            </ul>
+            <p class="card-muted">缺少这些本地前置条件时，bridge 无法仅从服务端完全修复。</p>
+          </article>
+          <article class="card">
+            <h3>推荐运行方式</h3>
+            <ul>
+              <li>用 bridge 稳定普通 Claude Code / Codex 请求</li>
+              <li>将 swarm 或多 agent 工作流视为独立能力，需在客户端机器上单独验证</li>
+            </ul>
+            <p class="card-muted">普通单线程工作：bridge 很有用。多 agent 能否跑通：客户端本地环境 + 服务端兼容共同决定。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="self-host">
+      <div class="container">
+        <p class="section-label">自托管</p>
+        <h2>自行运行 bridge</h2>
+        <span class="code-label">Docker</span>
+        <div class="code-block" role="region" aria-label="自托管 bridge 命令">
+          <code>cp config.example.toml config.toml
+docker build -t cc-codex-plugin .
+docker run --rm -p 8000:8000 \
+  -v "$(pwd)/config.toml:/app/config.toml:ro" \
+  cc-codex-plugin \
+  ccproxy serve --config /app/config.toml --host 0.0.0.0 --port 8000</code>
+        </div>
+        <p class="section-intro">然后用安装脚本或手动配置，将 Claude Code 指向该 bridge。模型映射不强制单一方案——暴露少量稳定公开模型名，并在文档中说明上游映射；详见仓库 <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/model-mapping.md">模型映射说明</a>。</p>
+      </div>
+    </section>
+
+    <section id="docs">
+      <div class="container">
+        <p class="section-label">文档</p>
+        <h2>仓库文档</h2>
+        <p class="section-intro">本站为静态展示页；完整文档保留在仓库 <code>docs/</code> 目录，未被修改。</p>
+        <div class="grid-3">
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/quickstart.md">
+            <h3>中文快速开始</h3>
+            <p class="card-muted">docs/zh-CN/quickstart.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/model-mapping.md">
+            <h3>中文模型映射</h3>
+            <p class="card-muted">docs/zh-CN/model-mapping.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/limitations.md">
+            <h3>中文限制说明</h3>
+            <p class="card-muted">docs/zh-CN/limitations.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/quickstart.md">
+            <h3>Quickstart (EN)</h3>
+            <p class="card-muted">docs/quickstart.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/model-mapping.md">
+            <h3>Model Mapping (EN)</h3>
+            <p class="card-muted">docs/model-mapping.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/limitations.md">
+            <h3>Limitations (EN)</h3>
+            <p class="card-muted">docs/limitations.md</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="footer-links" aria-label="外部链接">
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin">GitHub 仓库</a>
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/README.zh-CN.md">README（中文）</a>
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/README.md">README (English)</a>
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/LICENSE">LICENSE</a>
+      </nav>
+      <p>cc-codex-plugin · 内容来源于仓库 README 与 docs/ · <a href="en/">English</a></p>
+    </div>
+  </footer>
+</body>
+</html>

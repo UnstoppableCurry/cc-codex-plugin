@@ -2,6 +2,8 @@
 
 Use your Codex subscription from Claude Code.
 
+**Docs site:** [unstoppablecurry.github.io/cc-codex-plugin](https://unstoppablecurry.github.io/cc-codex-plugin/)
+
 [简体中文说明](./README.zh-CN.md)
 
 This repository is built for the real end-user path:
