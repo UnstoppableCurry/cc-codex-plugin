@@ -2,6 +2,8 @@
 
 把 **Codex 订阅** 转成 **Claude Code 可直接使用** 的入口。
 
+**文档站点：** [unstoppablecurry.github.io/cc-codex-plugin](https://unstoppablecurry.github.io/cc-codex-plugin/)
+
 ![Claude Code 配置截图](./assets/screenshot-claude-code.png)
 
 你可以把它理解成：

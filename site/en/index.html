@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cc-codex-plugin — Use Codex subscription from Claude Code</title>
+  <meta name="description" content="cc-codex-plugin: one-command Claude Code installer and bridge config to route requests through your Codex-backed bridge.">
+  <meta name="keywords" content="Claude Code,Codex,bridge,installer,cc-codex-plugin">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/cc-codex-plugin/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="cc-codex-plugin — Use Codex subscription from Claude Code">
+  <meta property="og:description" content="One-command Claude Code setup pointing at a Codex-backed bridge. Open source, self-hostable, documented.">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/cc-codex-plugin/en/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="zh-CN" href="https://unstoppablecurry.github.io/cc-codex-plugin/">
+  <link rel="alternate" hreflang="en" href="https://unstoppablecurry.github.io/cc-codex-plugin/en/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../" aria-label="cc-codex-plugin home">
+        <span class="brand-name">cc-codex-plugin</span>
+        <span class="brand-tag">Claude Code × Codex bridge</span>
+      </a>
+      <nav class="site-nav" aria-label="Page navigation">
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="#workflow">Workflow</a></li>
+          <li><a href="#screenshots">Screenshots</a></li>
+          <li><a href="#limitations">Limitations</a></li>
+          <li><a href="#self-host">Self-host</a></li>
+          <li><a href="#docs">Docs</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch" role="navigation" aria-label="Language">
+        <a href="../" lang="zh-CN">中文</a>
+        <a href="./" aria-current="true" lang="en">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <span class="badge">Open source · Self-hostable</span>
+        <h1>Use Claude Code as usual, routed through a Codex subscription</h1>
+        <p class="hero-lead">
+          Connect Codex-side capability or subscription to Claude Code. Ships a one-command installer, bridge runtime config, and inspectable examples—not an official plugin marketplace entry, but Claude Code configuration-based integration.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#install">Install</a>
+          <a class="btn btn-secondary" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/README.md">README</a>
+          <a class="btn btn-secondary" href="https://github.com/UnstoppableCurry/cc-codex-plugin">GitHub repo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="container">
+        <p class="section-label">Overview</p>
+        <h2>What this repository is</h2>
+        <p class="section-intro">
+          Claude Code does not currently expose a public “install third-party plugin from repo” flow like an app store. This repo ships a bridge runtime, a one-command Claude Code installer, and ready-to-copy config examples—plugin-like UX with Claude Code configuration as the integration point.
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Built for</h3>
+            <ul>
+              <li>Claude Code users routing through a Codex-backed subscription</li>
+              <li>Operators wanting a documented compatibility surface</li>
+              <li>Developers wanting an inspectable starting point instead of a closed relay</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>What it is not</h3>
+            <ul>
+              <li>Not a full hosted service</li>
+              <li>Not a secret production config dump</li>
+              <li>Not an official Claude Code marketplace plugin</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout" role="note">
+          <p><strong>In one sentence:</strong> You keep using Claude Code as usual; requests go through a Codex-backed bridge you configure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="container">
+        <p class="section-label">Install</p>
+        <h2>Fastest path: install into Claude Code</h2>
+        <span class="code-label">Terminal</span>
+        <div class="code-block" role="region" aria-label="Install command">
+          <code>curl -fsSL https://raw.githubusercontent.com/UnstoppableCurry/cc-codex-plugin/main/scripts/install-claude-code.sh | bash</code>
+        </div>
+        <p class="section-intro">The installer will:</p>
+        <ul>
+          <li>Ask for your bridge base URL</li>
+          <li>Ask for your gateway key</li>
+          <li>Optionally set a default model (<code>claude-sonnet-4-6</code> if left blank)</li>
+          <li>Update <code>~/.claude/settings.json</code>, merging only required env keys</li>
+        </ul>
+        <p>Configured keys: <code>ANTHROPIC_AUTH_TOKEN</code>, <code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_MODEL</code>. Restart Claude Code after install.</p>
+        <h3>Manual install</h3>
+        <p class="section-intro">Copy from <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/examples/claude-code/settings.json"><code>examples/claude-code/settings.json</code></a> into <code>~/.claude/settings.json</code>. Uninstall with <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/scripts/uninstall-claude-code.sh"><code>scripts/uninstall-claude-code.sh</code></a>.</p>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="container">
+        <p class="section-label">Workflow</p>
+        <h2>Recommended validation flow</h2>
+        <p class="section-intro">The intended main path for end users is the installer above. Full bridge deployment is in Self-host and repo docs.</p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>1. Start the bridge</h3>
+            <ol>
+              <li>Copy <code>config.example.toml</code> to <code>config.toml</code></li>
+              <li>Fill in auth token and upstream values you control</li>
+              <li>Build and run the Docker image</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>2. Connect Claude Code</h3>
+            <p>Installer or manual example sets <code>ANTHROPIC_AUTH_TOKEN</code>, <code>ANTHROPIC_BASE_URL</code>, <code>ANTHROPIC_MODEL</code>.</p>
+          </article>
+          <article class="card">
+            <h3>3. Connect Codex (optional)</h3>
+            <p>Use <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/examples/codex/config.example.toml"><code>examples/codex/config.example.toml</code></a> and point Codex at the local bridge provider.</p>
+          </article>
+          <article class="card">
+            <h3>4. Validate</h3>
+            <p>Start with a plain single-agent prompt:</p>
+            <ul>
+              <li>Ask a simple question</li>
+              <li>Ask for a small code explanation</li>
+              <li>Confirm request logs hit the bridge</li>
+            </ul>
+            <p class="card-muted">Only after that, test tools or multi-step workflows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="container">
+        <p class="section-label">Screenshots</p>
+        <h2>Configuration and workflow reference</h2>
+        <p class="section-intro">Documentation reference images from repo <code>assets/</code>, aligned with <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/limitations.md">limitations</a>.</p>
+        <div class="gallery">
+          <figure class="figure-card">
+            <img src="../assets/screenshot-claude-code.png" width="1200" height="675" alt="Claude Code direct path documentation: Node.js install, npm global claude-code, and minimal settings.json env vars ANTHROPIC_AUTH_TOKEN, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL" loading="lazy" decoding="async">
+            <figcaption>Claude Code path: minimal <code>settings.json</code> env keys (same keys the installer writes).</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <img src="../assets/screenshot-agents.png" width="1200" height="675" alt="Agents workflow documentation: single-thread tasks, parallelism, multi-agent isolation via Git worktree, and local prerequisites" loading="lazy" decoding="async">
+            <figcaption>Agents and worktree: request compatibility is not multi-agent parallelism; isolation depends on local Git/worktree.</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <img src="../assets/screenshot-claude-vs-codex.png" width="1200" height="675" alt="Claude Code vs Codex comparison: subagents and worktrees vs profiles and provider; protocol vs local environment compatibility" loading="lazy" decoding="async">
+            <figcaption>Claude Code vs Codex: different terminology and boundaries; a bridge unifies the gateway but cannot replicate Claude Code local agent environment alone.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="limitations">
+      <div class="container">
+        <p class="section-label">Limitations</p>
+        <h2>Request compatibility is not environment compatibility</h2>
+        <p class="section-intro">The bridge can normalize request/response formats. It cannot grant local IDE or CLI capabilities the client expects from its own machine.</p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Claude Code subagents depend on the local machine</h3>
+            <p>If Claude Code tries to create isolated subagents, the client may require:</p>
+            <ul>
+              <li>A valid Git repository</li>
+              <li>At least one commit</li>
+              <li>Working <code>git worktree</code> support</li>
+              <li>Or configured <code>WorktreeCreate</code> / <code>WorktreeRemove</code> hooks</li>
+            </ul>
+            <p class="card-muted">If local prerequisites are missing, no bridge can fully fix that from the server side alone.</p>
+          </article>
+          <article class="card">
+            <h3>Recommended operating mode</h3>
+            <ul>
+              <li>Use the bridge to stabilize normal Claude Code / Codex requests</li>
+              <li>Treat swarm or multi-agent workflows as a separate capability validated on the client machine</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="self-host">
+      <div class="container">
+        <p class="section-label">Self-host</p>
+        <h2>Run the bridge yourself</h2>
+        <span class="code-label">Docker</span>
+        <div class="code-block" role="region" aria-label="Self-host bridge commands">
+          <code>cp config.example.toml config.toml
+docker build -t cc-codex-plugin .
+docker run --rm -p 8000:8000 \
+  -v "$(pwd)/config.toml:/app/config.toml:ro" \
+  cc-codex-plugin \
+  ccproxy serve --config /app/config.toml --host 0.0.0.0 --port 8000</code>
+        </div>
+        <p class="section-intro">Then point Claude Code with the installer or manual settings. Model mapping is explicit and documented—see <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/model-mapping.md">model mapping</a>.</p>
+      </div>
+    </section>
+
+    <section id="docs">
+      <div class="container">
+        <p class="section-label">Docs</p>
+        <h2>Repository documentation</h2>
+        <p class="section-intro">This site is a static showcase; full docs remain in repo <code>docs/</code> unchanged.</p>
+        <div class="grid-3">
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/quickstart.md">
+            <h3>Quickstart</h3>
+            <p class="card-muted">docs/quickstart.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/model-mapping.md">
+            <h3>Model mapping</h3>
+            <p class="card-muted">docs/model-mapping.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/limitations.md">
+            <h3>Limitations</h3>
+            <p class="card-muted">docs/limitations.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/quickstart.md">
+            <h3>中文快速开始</h3>
+            <p class="card-muted">docs/zh-CN/quickstart.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/model-mapping.md">
+            <h3>中文模型映射</h3>
+            <p class="card-muted">docs/zh-CN/model-mapping.md</p>
+          </a>
+          <a class="card" href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/docs/zh-CN/limitations.md">
+            <h3>中文限制说明</h3>
+            <p class="card-muted">docs/zh-CN/limitations.md</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="footer-links" aria-label="External links">
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin">GitHub repo</a>
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/README.md">README (English)</a>
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/README.zh-CN.md">README (中文)</a>
+        <a href="https://github.com/UnstoppableCurry/cc-codex-plugin/blob/main/LICENSE">LICENSE</a>
+      </nav>
+      <p>cc-codex-plugin · Content from repo README and docs/ · <a href="../">中文</a></p>
+    </div>
+  </footer>
+</body>
+</html>
